@@ -1,0 +1,89 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "rules": {
+    /* spaces */
+    "space-before-blocks": 1,
+    "indent": [1, 2],
+    "keyword-spacing": 1,
+    "space-infix-ops": 1,
+    "newline-per-chained-call": 1,
+    "no-whitespace-before-property": 1,
+    "padded-blocks": ["warn", "never"],
+    "no-multiple-empty-lines": 1,
+    "object-curly-spacing": ["warn", "always"],
+    "block-spacing": 1,
+    "computed-property-spacing": 1,
+    "func-call-spacing": 1,
+    "key-spacing": 1,
+    /* variables */
+    "no-var": 2,
+    "no-undef": 2,
+    "prefer-const": 2,
+    /* comparison operators*/
+    "eqeqeq": 1,
+    "no-nested-ternary": 1,
+    "no-unneeded-ternary": 1,
+    "no-mixed-operators": 1,
+    /* blocks */
+    "nonblock-statement-body-position": 1,
+    /* obj */
+    "no-new-object": 1,
+    "object-shorthand": 1,
+    "prefer-destructuring": 1,
+    /* func */
+    "space-before-function-paren": 1,
+    "function-paren-newline": 2,
+    "prefer-arrow-callback": 2,
+    "arrow-spacing": 2,
+    "arrow-body-style": 2,
+    "implicit-arrow-linebreak": 1,
+    /* class */
+    "no-useless-constructor": 1,
+    /* export/import */
+    "no-dupe-class-members": 2,
+    "no-duplicate-imports": 2,
+//    "quotes": ["error", "double"],
+    "@typescript-eslint/indent": [1, 2],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-console": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/semi": 2
+  },
+  "overrides": [{
+    /**
+     * `.d.ts` files contain no logic and have different requirements. So some
+     * rules are not applicable here.
+     */
+    "files": "*.d.ts",
+    "rules": {
+      "no-shadow": "off"
+    }
+  },
+    {
+      /**
+       * Disabling this rule for `.ts` files because, it throws an error for
+       * exporting interfaces, and we can safely disable it since TypeScript
+       * will fail to compile with undefined vars, more info:
+       * https://github.com/typescript-eslint/typescript-eslint/issues/342
+       * https://github.com/eslint/typescript-eslint-parser/issues/437#issuecomment-435526531
+       */
+      "files": "*.ts",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
