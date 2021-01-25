@@ -1,0 +1,7 @@
+# Dockerfile
+FROM postgres:13.1
+
+ENV MYSQL_ROOT_PASSWORD=w23121991m
+ENV MYSQL_DATABASE=crmgithub
+
+EXPOSE 5432
