@@ -8,6 +8,7 @@ import cors from 'cors';
 import { logger } from "./services/logger";
 
 import {
+  loginUser,
   notFound
 } from "./controllers";
 

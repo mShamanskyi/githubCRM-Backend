@@ -1,0 +1,16 @@
+export enum AuthErrorCodes {
+  NOTFOUND = 'NOT_FOUND',
+  INVALID_PWD = 'INVALID_PASSWORD',
+  VALIDATION = 'INVALID_VALUE',
+  INVALID_TOKEN = 'INVALID_TOKEN',
+  UNVERIFIED_USER = 'USER_UNVERIFIED'
+}
+
+export enum ServiceErrorCodes {
+  JWT_INVALID_TOKEN= 'JWT_INVALID_TOKEN',
+  JWT_INVALID_TOKEN_SIGNATURE = 'JWT_INVALID_TOKEN_SIGNATURE'
+}
+
+export type ErrorCodes =
+  AuthErrorCodes |
+  ServiceErrorCodes;
