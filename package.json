@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate": "node src/db/migrations.js"
   },
   "keywords": [
     "crm",
@@ -24,6 +25,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/knex": "^0.16.1",
     "@types/node": "^14.0.4",
+    "@types/pg": "^7.14.9",
     "@types/request-promise": "^4.1.47",
     "@types/request-promise-native": "^1.0.17",
     "bunyan": "^1.8.15",
@@ -32,9 +34,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "inversify": "^5.0.5",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.16",
     "pg": "^8.5.1",
+    "postgres-migrations": "^5.1.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "request-promise-native": "^1.0.8",

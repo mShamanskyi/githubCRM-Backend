@@ -5,12 +5,13 @@ import express from "express";
 import makeCallback from "./express-callback";
 import cors from 'cors';
 
-import { logger } from './services/logger';
+import { logger } from "./services/logger";
 
 import {
   notFound
 } from "./controllers";
 
+const apiRoot = process.env.API_ROOT;
 const app = express();
 
 app.use(cors());
@@ -25,6 +26,9 @@ app.use((_, res, next) => {
   res.set({ Tk: "!" });
   next();
 });
+
+// Auth
+app.post(`${apiRoot}/user/login`, makeCallback(loginUser));
 
 // Not Found
 app.use(makeCallback(notFound));
