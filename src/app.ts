@@ -9,7 +9,8 @@ import { logger } from "./services/logger";
 
 import {
   loginUser,
-  notFound
+  notFound,
+  registerUser
 } from "./controllers";
 
 const apiRoot = process.env.API_ROOT;
@@ -30,6 +31,7 @@ app.use((_, res, next) => {
 
 // Auth
 app.post(`${apiRoot}/user/login`, makeCallback(loginUser));
+app.post(`${apiRoot}/user/register`, makeCallback(registerUser));
 
 // Not Found
 app.use(makeCallback(notFound));

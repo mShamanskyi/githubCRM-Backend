@@ -1,12 +1,12 @@
-import { LoginUser } from "../../use-cases";
+import { RegisterUser } from "../../use-cases";
 import { HttpRequest, HttpResponse, StatusCode } from "http-controller.types";
 import { logger } from "../../services/logger";
 import SystemError from '../../system-errors/system-error';
-import { AuthErrorCodes } from '../../system-errors/error-codes';
+import { ServiceErrorCodes, UserErrorCodes } from '../../system-errors/error-codes';
 
-const useCase = new LoginUser();
+const useCase = new RegisterUser();
 
-export default async function loginUser(httpRequest: HttpRequest): Promise<HttpResponse> {
+export default async function registerUser(httpRequest: HttpRequest): Promise<HttpResponse> {
   try {
     const result = await useCase.execute(httpRequest.body);
 
@@ -14,15 +14,14 @@ export default async function loginUser(httpRequest: HttpRequest): Promise<HttpR
       let statusCode: StatusCode = 400;
 
       switch (result.errorCode) {
-        case AuthErrorCodes.NOTFOUND:
-          statusCode = 404;
+        case UserErrorCodes.EXISTED:
+          statusCode = 409;
           break;
-        case AuthErrorCodes.VALIDATION:
+        case UserErrorCodes.VALIDATION:
           statusCode = 400;
           break;
-        case AuthErrorCodes.INVALID_PWD:
-          statusCode = 401;
-          break;
+        case ServiceErrorCodes.INTERNAL:
+          statusCode = 500;
       }
 
       return {
@@ -38,10 +37,10 @@ export default async function loginUser(httpRequest: HttpRequest): Promise<HttpR
         "Content-Type": "application/json"
       },
       body: {
-        result: result,
+        result,
         error: null
       },
-      statusCode: 200
+      statusCode: 201
     };
   } catch (err) {
     logger.error(err);
