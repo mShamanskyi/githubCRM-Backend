@@ -14,6 +14,7 @@ export interface IProject extends ProjectData {
   getForks: () => number;
   getIssues: () => number;
   getCreateDate: () => any;
+  getCreatedBy: () => string;
   setStars: (amount: number) => void;
   setForks: (amount: number) => void;
   setIssues: (amount: number) => void;
@@ -21,7 +22,7 @@ export interface IProject extends ProjectData {
 
 export default function CreateProject(Id: IdService) {
   return class Project {
-    
+
     readonly id: string;
     readonly user_id: string;
     readonly owner: string;
@@ -104,6 +105,10 @@ export default function CreateProject(Id: IdService) {
 
     getCreateDate() {
       return this.create_date
+    }
+
+    getCreatedBy() {
+      return this.user_id;
     }
 
     setStars(amount: number): void {

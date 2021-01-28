@@ -14,6 +14,27 @@ export default class ProjectDataBase {
     return response.rows;
   }
 
+  static async deleteProject(id: string): Promise<ProjectData[]> {
+    const sql = `
+        DELETE FROM projects
+        WHERE lower(id) = lower($1)
+    `;
+
+    const response: QueryResult = await pool.query(sql, [id]);
+    return response.rows;
+  }
+
+  static async findProjectById(id: string): Promise<ProjectData[]> {
+    const sql = `
+      SELECT * 
+      FROM projects
+      WHERE lower(id) = lower($1)
+    `;
+
+    const response: QueryResult = await pool.query(sql, [id]);
+    return response.rows;
+  }
+
   static async createProject({
     id,
     user_id,

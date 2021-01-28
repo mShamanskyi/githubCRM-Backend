@@ -16,8 +16,7 @@ CREATE TABLE projects
   stars integer,
   forks integer,
   issues integer,
-  create_date date,
-  foreign key (user_id) references users (id) on delete cascade
+  create_date date
 );
 
 alter table projects owner to postgres;

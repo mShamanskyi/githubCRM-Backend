@@ -19,6 +19,11 @@ export enum ProjectErrors {
   INVALID_ID = 'INVALID BUSINESS ID'
 }
 
+export enum ProjectDeleteErrors {
+  NOTFOUND= 'BUSINESS_NOT_FOUND',
+  FORBIDDEN= 'USER_HAS_NO_PERMISSION'
+}
+
 export enum UserErrorCodes {
   EXISTED = 'EXISTED_EMAIL',
   VALIDATION = 'INVALID_VALUE',
@@ -29,4 +34,5 @@ export type ErrorCodes =
   AuthErrorCodes |
   ServiceErrorCodes |
   UserErrorCodes |
-  ProjectErrors;
+  ProjectErrors | 
+  ProjectDeleteErrors;
