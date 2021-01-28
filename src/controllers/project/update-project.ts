@@ -1,27 +1,23 @@
-import { DeleteProject } from '../../use-cases';
 import { HttpRequest, HttpResponse, StatusCode } from "http-controller.types";
 import { logger } from "../../services/logger";
 import SystemError from '../../system-errors/system-error';
-import { ProjectDeleteErrors, ServiceErrorCodes } from '../../system-errors/error-codes';
+import { UpdateProject } from '../../use-cases';
+import { ServiceErrorCodes, UserErrorCodes } from '../../system-errors/error-codes';
 
-const useCase = new DeleteProject();
+const useCase = new UpdateProject();
 
-export default async function deleteProject(httpRequest: HttpRequest): Promise<HttpResponse> {
+export default async function updateProject(httpRequest: HttpRequest): Promise<HttpResponse> {
   try {
 
     const result = await useCase.execute(httpRequest.params.id, httpRequest.locals.user);
 
     if (result instanceof SystemError) {
-      let statusCode: StatusCode;
+      let statusCode: StatusCode = 400;
 
       switch (result.errorCode) {
-        case ProjectDeleteErrors.FORBIDDEN:
-          statusCode = 403;
+        case UserErrorCodes.VALIDATION:
+          statusCode = 400;
           break;
-        case ProjectDeleteErrors.NOTFOUND:
-          statusCode = 404;
-          break;
-
         case ServiceErrorCodes.INTERNAL:
           statusCode = 500;
       }
@@ -39,9 +35,10 @@ export default async function deleteProject(httpRequest: HttpRequest): Promise<H
         "Content-Type": "application/json"
       },
       body: {
+        result,
         error: null
       },
-      statusCode: 200
+      statusCode: 201
     };
   } catch (err) {
     logger.error(err);

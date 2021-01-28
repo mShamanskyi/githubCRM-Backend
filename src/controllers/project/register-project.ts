@@ -6,7 +6,7 @@ import { ServiceErrorCodes, UserErrorCodes } from '../../system-errors/error-cod
 
 const useCase = new RegisterProject();
 
-export default async function registerBusiness(httpRequest: HttpRequest): Promise<HttpResponse> {
+export default async function registerProject(httpRequest: HttpRequest): Promise<HttpResponse> {
   try {
 
     const result = await useCase.execute({ ...httpRequest.body, createdBy: httpRequest.locals.user.id });

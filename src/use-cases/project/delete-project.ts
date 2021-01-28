@@ -6,9 +6,9 @@ import { ProjectDeleteErrors, ServiceErrorCodes } from '../../system-errors/erro
 
 import ProjectDataBase from '../../db/project-db';
 
-export default function CreateDeleteBusiness() {
+export default function CreateDeleteProject() {
 
-  return class DeleteBusiness implements UseCase {
+  return class DeleteProject implements UseCase {
     async execute(id: string, user: DecodedUser): Promise<void | Error> {
 
       const projectInId = await ProjectDataBase.findProjectById(id);
@@ -24,7 +24,7 @@ export default function CreateDeleteBusiness() {
       }
 
       if (projectInDb.getCreatedBy() !== user.id) {
-        return new SystemError('User can update only his own business', ProjectDeleteErrors.FORBIDDEN);
+        return new SystemError('User can remove only his own project', ProjectDeleteErrors.FORBIDDEN);
       }
 
       const removed = await ProjectDataBase.deleteProject(projectInDb.getId());

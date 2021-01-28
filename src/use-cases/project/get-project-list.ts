@@ -3,7 +3,7 @@ import { ProjectData } from "entities.types";
 
 import ProjectDataBase from '../../db/project-db';
 
-export default function CreateGetBusinessData() {
+export default function CreateGetProjectData() {
   return class GetUserData implements UseCase {
     async execute(id: string): Promise<Partial<ProjectData[]> | Error> {
 
