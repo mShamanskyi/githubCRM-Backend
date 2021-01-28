@@ -11,7 +11,8 @@ import {
   loginUser,
   notFound,
   registerUser,
-  getProjectList
+  getProjectList,
+  registerProject
 } from "./controllers";
 import { authorization } from "./middlewares";
 
@@ -40,6 +41,7 @@ app.use(authorization);
 
 // Projects
 app.get(`${apiRoot}/project/getUserProjects`, makeCallback(getProjectList));
+app.post(`${apiRoot}/project/create`, makeCallback(registerProject));
 
 // Not Found
 app.use(makeCallback(notFound));

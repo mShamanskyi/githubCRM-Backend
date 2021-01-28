@@ -6,7 +6,7 @@ export interface UserData {
 }
 
 export interface ProjectData {
-  id: string,
+  id?: string,
   user_id: string,
   owner: string,
   name: string,

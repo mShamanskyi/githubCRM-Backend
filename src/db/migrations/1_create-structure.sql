@@ -8,7 +8,7 @@ alter table users owner to postgres;
 
 CREATE TABLE projects
 (
-	id int NOT NULL,
+	id VARCHAR(255) NOT NULL,
   user_id  VARCHAR(255) NOT NULL,
   owner varchar,
   name varchar,
@@ -16,7 +16,8 @@ CREATE TABLE projects
   stars integer,
   forks integer,
   issues integer,
-  create_date date
+  create_date date,
+  foreign key (user_id) references users (id) on delete cascade
 );
 
 alter table projects owner to postgres;

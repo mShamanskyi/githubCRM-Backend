@@ -1,9 +1,18 @@
 import SystemError from '../system-errors/system-error';
+import { ProjectData } from 'entities.types';
 
 export interface TokenService {
   releaseToken: (data: any) => string;
   verifyToken: (token: string) => any;
   decodeToken: (token: string) => any | SystemError;
+}
+
+export interface GithubService {
+  fetchRepoInformation: (repoPath: string) => Promise<ProjectData | SystemError>
+}
+
+export interface GithubServiceConstructable {
+  new(): GithubService;
 }
 
 export interface PWDService {

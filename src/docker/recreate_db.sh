@@ -6,5 +6,4 @@ docker run -d -p 9999:5432 \
   -e POSTGRES_PASSWORD=w23121991m\
   -e POSTGRES_DB=github-crm\
   --name postgres-local\
-  -v /d/Projects/githubCRM/backend/pgdata:/var/lib/postgresql/data\
   postgres
