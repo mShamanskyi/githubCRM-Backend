@@ -8,7 +8,6 @@ import { User } from '../../domains';
 import SystemError from '../../system-errors/system-error';
 import UserDataBase from '../../db/user-db';
 import { AuthErrorCodes } from '../../system-errors/error-codes';
-import { UserData } from "entities.types";
 
 export default function CreateLoginUser(JWTService: TokenServiceConstructable) {
   const jwtService = new JWTService();

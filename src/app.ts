@@ -10,8 +10,10 @@ import { logger } from "./services/logger";
 import {
   loginUser,
   notFound,
-  registerUser
+  registerUser,
+  getProjectList
 } from "./controllers";
+import { authorization } from "./middlewares";
 
 const apiRoot = process.env.API_ROOT;
 const app = express();
@@ -29,9 +31,15 @@ app.use((_, res, next) => {
   next();
 });
 
-// Auth
+// Authorization Flow
 app.post(`${apiRoot}/user/login`, makeCallback(loginUser));
 app.post(`${apiRoot}/user/register`, makeCallback(registerUser));
+
+// Auth Middleware
+app.use(authorization);
+
+// Projects
+app.get(`${apiRoot}/project/getUserProjects`, makeCallback(getProjectList));
 
 // Not Found
 app.use(makeCallback(notFound));
