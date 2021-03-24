@@ -7,6 +7,7 @@ import deleteProject from './project/delete-project';
 import updateProject from './project/update-project';
 
 import notFound from "./not-found";
+import healthCheck from "./health-check";
 
 export {
   deleteProject,
@@ -15,5 +16,6 @@ export {
   notFound,
   registerUser,
   registerProject,
-  updateProject
+  updateProject,
+  healthCheck
 };

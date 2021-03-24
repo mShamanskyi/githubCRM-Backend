@@ -14,7 +14,8 @@ import {
   getProjectList,
   registerProject,
   deleteProject,
-  updateProject
+  updateProject,
+  healthCheck
 } from "./controllers";
 import { authorization } from "./middlewares";
 
@@ -37,6 +38,9 @@ app.use((_, res, next) => {
 // Authorization Flow
 app.post(`${apiRoot}/user/login`, makeCallback(loginUser));
 app.post(`${apiRoot}/user/register`, makeCallback(registerUser));
+
+// Health Check
+app.get(`${apiRoot}/health-check`, makeCallback(healthCheck));
 
 // Auth Middleware
 app.use(authorization);
